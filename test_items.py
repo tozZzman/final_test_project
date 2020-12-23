@@ -1,12 +1,14 @@
 import time
-link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-def test_localization(browser, request):
+link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+
+def test_exist_add_to_cart_button(browser):
+	# переход на нужную страницу
     browser.get(link)
-    basket = browser.find_element_by_css_selector('.btn-primary.btn-add-to-basket')
-    time.sleep(30)
-    language = request.config.getoption('language')
-    if language == 'fr':
-        basket_text = basket.text
-        assert basket_text == 'Ajouter au panier', 'Название кнопки добавления в корзину не соответствует ожидаемому результату'
-
+    time.sleep(3)
+	# поиск кнопки добавления товара в корзину
+    WebDriverWait(browser, 3).until(
+		EC.visibility_of_element_located((By.CLASS_NAME, "btn-add-to-basket")), "No add to cart button on page")
