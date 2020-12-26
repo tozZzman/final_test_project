@@ -2,3 +2,5 @@
 __pycache__/conftest.cpython-38-pytest-5.1.1.pyc
 __pycache__/__init__.cpython-38.pyc
 __pycache__/test_main_page.cpython-38-pytest-5.1.1.pyc
+debug.log
+geckodriver.log
