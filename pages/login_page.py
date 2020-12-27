@@ -21,3 +21,15 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.EMAIL), "Login for registration not found"
         assert self.is_element_present(*LoginPageLocators.REG_PASSWORD), "Registration password not found"
         assert self.is_element_present(*LoginPageLocators.REG_PASSWORD_2), "Repeated registration password not found"
+
+    def register_new_user(self, email, password):
+        login = self.browser.find_element(*LoginPageLocators.EMAIL)
+        login.send_keys(email)
+        password_key = self.browser.find_element(*LoginPageLocators.REG_PASSWORD)
+        password_key.send_keys(password)
+        password_key2 = self.browser.find_element(*LoginPageLocators.REG_PASSWORD_2)
+        password_key2.send_keys(password)
+        button = self.browser.find_element(*LoginPageLocators.BUTTON_REG)
+        button.click()
+        assert self.is_element_present(*LoginPageLocators.ALERT_SUCCES), "Successful registration message is not displayed"
+        assert self.browser.find_element(*LoginPageLocators.ALERT_SUCCES).text == 'Спасибо за регистрацию!', "Successful registration message is not correct"
